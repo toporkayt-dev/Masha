@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 причин почему я люблю тебя, Мария</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #5a3e36;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #8b4513;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #a0522d;
+        }
+
+        .heart {
+            color: #e74c3c;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .gallery-section {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #8b4513;
+        }
+
+        .upload-area {
+            border: 3px dashed #e74c3c;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+
+        .upload-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .upload-btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 300px;
+        }
+
+        .photo-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-container:hover .photo {
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(231, 76, 60, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-container:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .reasons-section {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .reason-number {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .love-message {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #8b4513;
+        }
+
+        .signature {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #a0522d;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        /* Анимация появления элементов */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Мария, <span class="heart">❤</span> ты моё счастье!</h1>
+            <p class="subtitle">100 причин почему я люблю тебя больше всего на свете</p>
+        </header>
+
+        <section class="gallery-section">
+            <h2>Фотогалерея</h2>
+            
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">📷</div>
+                <p class="upload-text">Нажмите сюда или перетащите фотографии</p>
+                <button class="upload-btn">Выбрать фотографии</button>
+                <input type="file" id="file-input" accept="image/*" multiple>
+            </div>
+            
+            <div class="gallery" id="gallery">
+                <!-- Фотографии будут добавляться здесь -->
+            </div>
+        </section>
+
+        <section class="reasons-section">
+            <h2>100 причин почему я люблю тебя</h2>
+            <div class="reasons-grid" id="reasons">
+                <!-- Причины будут добавлены через JavaScript -->
+            </div>
+        </section>
+
+        <footer>
+            <p class="love-message">Ты - самое прекрасное, что случилось в моей жизни</p>
+            <p class="signature">С любовью, твой, Сеня</p>
+        </footer>
+    </div>
+
+    <script>
+        // Массив с 100 причинами любви к Марии
+        const reasons = [
+            "Твоя улыбка освещает мою жизнь",
+            "Твой смех - самая прекрасная музыка",
+            "Ты всегда поддерживаешь меня в трудные моменты",
+            "Твои глаза полны доброты и тепла",
+            "Ты умеешь слушать и понимать",
+            "С тобой я могу быть самим собой",
+            "Ты вдохновляешь меня становиться лучше",
+            "Твоя забота обо мне бесценна",
+            "Ты самая красивая девушка на свете",
+            "Твоя внутренняя сила восхищает",
+            "Ты умеешь находить радость в мелочах",
+            "С тобой даже обычный день становится особенным",
+            "Твои объятия - мое самое безопасное место",
+            "Ты умна и мудра не по годам",
+            "Твоё чувство юмора всегда поднимает мне настроение",
+            "Ты терпелива и снисходительна к моим недостаткам",
+            "Ты умеешь прощать и не держать обиды",
+            "Твоя искренность трогает до глубины души",
+            "Ты умеешь удивлять и делать сюрпризы",
+            "Твоя любовь ко мне безусловна",
+            "Ты веришь в меня больше, чем я сам",
+            "Твоя страсть к жизни заразительна",
+            "Ты всегда находишь правильные слова",
+            "Твоя нежность делает меня счастливым",
+            "Ты умеешь создавать уют там, где находишься",
+            "Твоя преданность не знает границ",
+            "Ты учишь меня видеть красоту в простом",
+            "Твоя душа невероятно глубока и интересна",
+            "Ты умеешь мечтать и вдохновлять на мечты",
+            "Твоя уверенность в себе вдохновляет",
+            "Ты всегда находишь время для меня",
+            "Твои маленькие жесты внимания бесценны",
+            "Ты умеешь создавать праздник из обычного дня",
+            "Твоя любовь к жизни вдохновляет меня",
+            "Ты умеешь быть сильной, когда это нужно",
+            "Твоя чувствительность делает тебя особенной",
+            "Ты умеешь ценить простые радости",
+            "Твоя открытость новому впечатляет",
+            "Ты умеешь находить общий язык с любым человеком",
+            "Твоя щедрость не знает границ",
+            "Ты умеешь признавать свои ошибки",
+            "Твоя скромность делает тебя еще прекраснее",
+            "Ты умеешь радоваться успехам других",
+            "Твоя любовь к природе вдохновляет",
+            "Ты умеешь находить красоту в несовершенстве",
+            "Твоя способность любить безусловно восхищает",
+            "Ты умеешь создавать гармонию вокруг себя",
+            "Твоя интуиция редко подводит",
+            "Ты умеешь находить выход из сложных ситуаций",
+            "Твоя преданность семье и друзьям трогает",
+            "Ты умеешь быть ребенком и взрослой одновременно",
+            "Твоя любовь к знаниям вдохновляет",
+            "Ты умеешь ценить искусство и красоту",
+            "Твоя способность сопереживать уникальна",
+            "Ты умеешь находить общий язык с детьми",
+            "Твоя любовь к животным показывает твою доброту",
+            "Ты умеешь создавать уютную атмосферу",
+            "Твоя способность адаптироваться к изменениям впечатляет",
+            "Ты умеешь находить компромиссы",
+            "Твоя любовь к путешествиям вдохновляет",
+            "Ты умеешь ценить моменты и жить настоящим",
+            "Твоя способность видеть хорошее в людях восхищает",
+            "Ты умеешь прощать и отпускать обиды",
+            "Твоя любовь к книгам и знаниям вдохновляет",
+            "Ты умеешь находить необычное в обычном",
+            "Твоя способность радоваться мелочам заразительна",
+            "Ты умеешь создавать праздник из ничего",
+            "Твоя любовь к музыке делает тебя особенной",
+            "Ты умеешь находить время для саморазвития",
+            "Твоя способность сохранять спокойствие в стрессовых ситуациях впечатляет",
+            "Ты умеешь быть опорой для других",
+            "Твоя любовь к кулинарии радует мой желудок",
+            "Ты умеешь находить общий язык с моими друзьями",
+            "Твоя способность видеть суть вещей восхищает",
+            "Ты умеешь создавать теплую атмосферу в доме",
+            "Твоя любовь к спорту и здоровому образу жизни вдохновляет",
+            "Ты умеешь находить баланс между работой и личной жизнью",
+            "Твоя способность быть благодарной трогает",
+            "Ты умеешь создавать уют своими руками",
+            "Твоя любовь к истории и культуре обогащает наши беседы",
+            "Ты умеешь находить красоту в каждом времени года",
+            "Твоя способность быть верной своим принципам восхищает",
+            "Ты умеешь создавать гармонию в отношениях",
+            "Твоя любовь к звездам и космосу делает тебя загадочной",
+            "Ты умеешь находить вдохновение в простых вещах",
+            "Твоя способность быть терпеливой учит меня",
+            "Ты умеешь создавать воспоминания, которые греют душу",
+            "Твоя любовь к искусству делает тебя многогранной",
+            "Ты умеешь находить общий язык с моей семьей",
+            "Твоя способность быть честной и прямой ценится",
+            "Ты умеешь создавать ощущение дома, где бы мы ни были",
+            "Твоя любовь к науке и открытиям вдохновляет",
+            "Ты умеешь находить радость в помощи другим",
+            "Твоя способность быть независимой и сильной восхищает",
+            "Ты умеешь создавать атмосферу любви вокруг себя",
+            "Твоя любовь к жизни во всех ее проявлениях заразительна",
+            "Ты умеешь находить свет даже в самые темные дни",
+            "Твоя способность любить безусловно - это дар",
+            "Ты умеешь создавать магию в обыденности",
+            "И самая главная причина - ты просто существуешь в этом мире"
+        ];
+
+        // Функция для загрузки причин на страницу
+        function loadReasons() {
+            const reasonsContainer = document.getElementById('reasons');
+            
+            reasons.forEach((reason, index) => {
+                const reasonCard = document.createElement('div');
+                reasonCard.className = 'reason-card fade-in';
+                reasonCard.innerHTML = `
+                    <div class="reason-number">${index + 1}</div>
+                    <div class="reason-text">${reason}</div>
+                `;
+                reasonsContainer.appendChild(reasonCard);
+            });
+        }
+
+        // Функция для загрузки фотографий
+        function initGallery() {
+            const fileInput = document.getElementById('file-input');
+            const uploadArea = document.getElementById('upload-area');
+            const gallery = document.getElementById('gallery');
+            
+            // Обработчик клика на область загрузки
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Обработчик выбора файлов
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                handleFiles(files);
+            });
+            
+            // Обработчик перетаскивания файлов
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.background = 'rgba(255, 255, 255, 0.9)';
+                uploadArea.style.borderColor = '#c0392b';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.background = 'rgba(255, 255, 255, 0.5)';
+                uploadArea.style.borderColor = '#e74c3c';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.background = 'rgba(255, 255, 255, 0.5)';
+                uploadArea.style.borderColor = '#e74c3c';
+                
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+            
+            // Функция обработки выбранных файлов
+            function handleFiles(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    // Проверяем, что файл является изображением
+                    if (!file.type.match('image.*')) continue;
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = (function(theFile) {
+                        return function(e) {
+                            // Создаем контейнер для фотографии
+                            const photoContainer = document.createElement('div');
+                            photoContainer.className = 'photo-container fade-in';
+                            
+                            // Создаем элемент изображения
+                            const img = document.createElement('img');
+                            img.className = 'photo';
+                            img.src = e.target.result;
+                            img.alt = 'Мария';
+                            
+                            // Создаем кнопку удаления
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.className = 'delete-btn';
+                            deleteBtn.innerHTML = '×';
+                            deleteBtn.title = 'Удалить фотографию';
+                            
+                            // Добавляем обработчик удаления
+                            deleteBtn.addEventListener('click', function() {
+                                gallery.removeChild(photoContainer);
+                            });
+                            
+                            // Добавляем элементы в контейнер
+                            photoContainer.appendChild(img);
+                            photoContainer.appendChild(deleteBtn);
+                            
+                            // Добавляем контейнер в галерею
+                            gallery.appendChild(photoContainer);
+                            
+                            // Активируем анимацию появления
+                            setTimeout(() => {
+                                photoContainer.classList.add('visible');
+                            }, 100);
+                        };
+                    })(file);
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            // Загружаем демонстрационные фотографии (в реальном сайте их не будет)
+            loadDemoPhotos();
+        }
+        
+        // Функция для загрузки демонстрационных фотографий
+        function loadDemoPhotos() {
+            // В реальном сайте эта функция не нужна
+            // Здесь мы просто создаем несколько плейсхолдеров
+            const gallery = document.getElementById('gallery');
+            
+            for (let i = 0; i < 4; i++) {
+                const photoContainer = document.createElement('div');
+                photoContainer.className = 'photo-container fade-in';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'photo-placeholder';
+                placeholder.innerHTML = `Загрузи фотографию Марии ${i+1}`;
+                
+                photoContainer.appendChild(placeholder);
+                gallery.appendChild(photoContainer);
+                
+                // Активируем анимацию появления
+                setTimeout(() => {
+                    photoContainer.classList.add('visible');
+                }, 100);
+            }
+        }
+
+        // Функция для анимации появления элементов при прокрутке
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            loadReasons();
+            initGallery();
+            observeElements();
+        });
+    </script>
+</body>
+</html>
